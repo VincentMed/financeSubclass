@@ -40,19 +40,16 @@ class loan(object):
         return self._Pmt
     
 class creditCards(object):
-    def __init__(self, cc_name, cc_balance):
+    def __init__(self, cc_name, cc_balance, cc_APR):
+        self.cc_APR = cc_APR
         self.cc_name = cc_name
-        self.cc_balance = 2000
-        cc_balance = self.cc_balance - cc_balance
+        self.cc_balance = cc_balance
+        monthly_payment = (cc_APR/12)*cc_balance
+        #monthly payment = APR / 12 * balance
+        #self.cc_balance = self.cc_limit - self.cc_balance
         
-        print(f"Credit card {cc_name} has a balance of ${cc_balance}.")
+        print(f"\nYour {cc_name} has a current balance of ${cc_balance}, that is 12 months at: ${monthly_payment: .2f}")
 
-class finance(creditCards):
-    def get_total(cc_balance):
-        return cc_balance
-
-        
-    
         
 
 if __name__ == "__main__":
@@ -64,5 +61,5 @@ if __name__ == "__main__":
     loan1.setMonths(42)
     payment = loan1.computePmt()
     
-    credit1 = creditCards("Amex", 600)
-    credit2 = creditCards("Visa", 1300 )
+    credit1 = creditCards("Amex", 600, 10.5)
+    credit2 = creditCards("Disover", 500, 20.5)
