@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Nov  7 09:07:39 2022
-
 @author: Vincent Medrano
-
 add a class to example class
 class creditCards(finance):
 sub class of finance, contains at least 2 credit cards : name, balance
@@ -41,14 +39,16 @@ class loan(object):
     
 class creditCards(object):
     def __init__(self, cc_name, cc_balance, cc_APR):
-        self.cc_APR = cc_APR
+        self.cc_APR = cc_APR/100
         self.cc_name = cc_name
         self.cc_balance = cc_balance
-        monthly_payment = (cc_APR/12)*cc_balance
-        #monthly payment = APR / 12 * balance
-        #self.cc_balance = self.cc_limit - self.cc_balance
+        self.monthly_interest = (self.cc_APR/12)*self.cc_balance
+        self.total_monthly = self.cc_balance/12+self.monthly_interest
         
-        print(f"\nYour {cc_name} has a current balance of ${cc_balance}, that is 12 months at: ${monthly_payment: .2f}")
+        
+        print(f"\n{self.cc_name} balance: ${self.cc_balance}")
+        print(f"\nMonthly interest is: ${self.monthly_interest:.2f}")
+        print(f"\nTotal monthly payment: ${self.total_monthly:.2f}")
 
         
 
@@ -61,5 +61,5 @@ if __name__ == "__main__":
     loan1.setMonths(42)
     payment = loan1.computePmt()
     
-    credit1 = creditCards("Amex", 600, 10.5)
-    credit2 = creditCards("Disover", 500, 20.5)
+    credit1 = creditCards("Amex", 600, 12)
+    credit2 = creditCards("Discover", 500, 20.5)
