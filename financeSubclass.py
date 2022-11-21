@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov  7 09:07:39 2022
-@author: Vincent Medrano
+Created on Sun Aug 15 16:38:26 2021
+@author: 16617
+Interest rate problem
+given 2 o 3, solve for the last one
 """
 
 class loan(object):
@@ -13,14 +15,12 @@ class loan(object):
         
     def setPV(self, PV):
         self._PV = PV
-        print('Amount Borrowed = ', self._PV)
-        return self._PV
+        print('Amount borrowed = ', self._PV)
         
     def setRate(self, ratePct):
         #set interest, apr
         self._ratePct = ratePct
         print('APR = ', self._ratePct,'%')
-        return self._ratePct
         
     def setMonths(self, months):
         self._months = months
@@ -34,26 +34,13 @@ class loan(object):
         print('Monthly payment = $', round(self._Pmt,2))
         return self._Pmt
 
-# add a class to example class
-# class creditCards(loan):
-# sub class of finance, contains at least 2 credit cards : name, balance
-# and monthly payment.
-# function to get total owed
-# function to get monthly total payments to CCs    
 class creditCards(loan):
     def __init__(self, name):
-        super().__init__(name)    
-
-    def makePayment(self, amount):
-
-        self.amount = amount
-        print("Thank you for your payment of $", self.amount)
-        return self.amount
-
+        loan.__init__(self, name)
+        
     def getBalance(self):
-        self.total = self._Pmt * self._months - self.amount
-        print(f"New Balance = ${self.total:.2f}")
-
+        self.balance = self._months * self._Pmt
+        print(f"Current Balance is ${self.balance:.2f}")     
 
 if __name__ == "__main__":
     # loan1 = loan('Dr J')
@@ -64,22 +51,18 @@ if __name__ == "__main__":
     # loan1.setMonths(42)
     # payment = loan1.computePmt()
 
-    credit1 = creditCards("Amex")
-    credit1.who()
-    credit1.setPV(1000)
-    credit1.setRate(10.0)
-    credit1.setMonths(12)
-    payment = credit1.computePmt()
+    creditCard1 = creditCards(input("Enter name of Credit Card"))
+    creditCard1.who()
+    creditCard1.setPV(1000)
+    creditCard1.setRate(12)
+    creditCard1.setMonths(12)
+    payment = creditCard1.computePmt()
+    creditCard1.getBalance()
 
-    credit1.makePayment(500)
-    credit1.getBalance()
-    
-    credit2 = creditCards("Amex")
-    credit2.who()
-    credit2.setPV(1000)
-    credit2.setRate(10.0)
-    credit2.setMonths(12)
-    payment = credit2.computePmt()
-
-    credit2.makePayment(500)
-    credit2.getBalance()
+    creditCard2 = creditCards(input("Enter name of Credit Card"))
+    creditCard2.who()
+    creditCard2.setPV(5000)
+    creditCard2.setRate(10)
+    creditCard2.setMonths(12)
+    payment = creditCard2.computePmt()
+    creditCard2.getBalance()
